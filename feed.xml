@@ -5,18 +5,22 @@
     <description>Personal pages</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 02 Jan 2017 19:15:18 +0000</pubDate>
-    <lastBuildDate>Mon, 02 Jan 2017 19:15:18 +0000</lastBuildDate>
+    <pubDate>Mon, 02 Jan 2017 20:01:32 +0000</pubDate>
+    <lastBuildDate>Mon, 02 Jan 2017 20:01:32 +0000</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
     
       <item>
-        <title>Github is awesome</title>
+        <title>Static hosting: jekyll, forestry, github and cloudflare</title>
         <description>&lt;h2 id=&quot;github--why-&quot;&gt;Github ? why ?&lt;/h2&gt; &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste quas, esse laudantium quis ipsa consequuntur iure atque! Necessitatibus quam quidem illum, corrupti molestiae, maxime neque, consequuntur quia alias, modi commodi.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate rem ducimus dolores repellat itaque perferendis corporis ex dicta doloremque optio harum excepturi, ut, praesentium asperiores! Voluptatum amet perspiciatis iusto, fugiat!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, libero quia placeat necessitatibus culpa mollitia, illum, quam sed ratione ad eaque suscipit consectetur itaque quasi aperiam. Quaerat, nihil voluptas tenetur?Lorem ipsum dolor sit amet, consectetur adipisicing elit....</description>
-        <pubDate>Sat, 12 Mar 2016 00:06:31 +0000</pubDate>
+        <pubDate>Sun, 01 Jan 2017 15:08:00 +0000</pubDate>
         <link>/space/</link>
         <guid isPermaLink="true">/space/</guid>
         
-        <category>mongodb</category>
+        <category>jekyll</category>
+        
+        <category>github</category>
+        
+        <category>cloudflare</category>
         
         
         <category>Github is awesome</category>

@@ -12,10 +12,6 @@ github_username: lucab
 markdown: kramdown
 highlighter: rouge
 permalink: "/:title/"
-exclude:
-- package.json
-- src
-- node_modules
 compress_html:
   clippings: all
   comments: all
@@ -35,7 +31,9 @@ links:
   url: "/series"
 - title: tags
   url: "/tags"
-projects:
-- name: LUA engine for MAME scripting
-  url: "/projects/mame-lua"
+exclude:
+- package.json
+- src
+- node_modules
+- LICENSE
 timezone: Etc/UTC

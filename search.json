@@ -1,11 +1,11 @@
 [
   
     {
-      "title"    : "Github is awesome",
+      "title"    : "Static hosting: jekyll, forestry, github and cloudflare",
       "category" : "Github is awesome",
-      "tags"     : "mongodb",
+      "tags"     : "jekyll, github, and cloudflare",
       "url"      : "/space/",
-      "date"     : "12 Mar 2016"
+      "date"     : "01 Jan 2017"
     } 
   
 ]
