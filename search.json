@@ -1,10 +1,19 @@
 [
   
     {
+      "title"    : "LUA scripting in MAME",
+      "category" : "",
+      "tags"     : "mame",
+      "url"      : "/projects/mame-lua/",
+      "date"     : "01 Jan 2017"
+    },
+  
+  
+    {
       "title"    : "Static hosting: jekyll, forestry, github and cloudflare",
       "category" : "",
       "tags"     : "jekyll, github, cloudflare, and forestry",
-      "url"      : "/static-hosting/",
+      "url"      : "/posts/static-hosting/",
       "date"     : "01 Jan 2017"
     } 
   

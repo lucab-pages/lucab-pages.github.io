@@ -17,9 +17,17 @@ compress_html:
   comments: all
   endings: []
   profile: false
+defaults:
+- scope:
+    path: _posts
+    type: posts
+  values:
+    permalink: "/posts/:title/"
+    layout: post
 collections:
   projects:
     output: true
+    permalink: "/:collection/:title/"
 links:
 - title: home
   url: "/"
