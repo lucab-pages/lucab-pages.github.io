@@ -8,14 +8,6 @@
       "date"     : "01 Jan 2017"
     },
   
-    {
-      "title"    : "rkt-volo",
-      "category" : "",
-      "tags"     : "",
-      "url"      : "/posts/rkt-volo/",
-      "date"     : "15 Feb 2017"
-    },
-  
   
     {
       "title"    : "Static hosting: jekyll, forestry, github and cloudflare",
