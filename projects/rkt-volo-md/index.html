@@ -1,0 +1,136 @@
+<h1 id="rkt-volo-a-stage1-experiment-in-rust">rkt-volo: a stage1 experiment in Rust</h1>
+
+<blockquote>
+  <p>Article still in progress</p>
+</blockquote>
+
+<p><code class="highlighter-rouge">volo</code> is a small experimental stage1 for <a href="https://coreos.com/rkt">rkt</a>, written in <a href="https://www.rust-lang.org">Rust</a>. Source code available in <a href="https://github.com/lucab/rkt-volo">rkt-volo repository</a>.</p>
+
+<h2 id="rkt-design-stages">rkt design: stages</h2>
+
+<p>rkt is a modular container runtime for Linux, supporting pods as first-class entities and mainly written in Go. Its architecture is built around the concept of sealed components called “stages”.</p>
+
+<p>A typical container execution goes through three stages:</p>
+
+<ul>
+  <li>
+    <p>stage0: initial rkt process. This stage takes care of fetching images and rendering to filesystem.</p>
+  </li>
+  <li>
+    <p>stage1: custom environment setup. This stage takes care of creating a contained environment for pod execution.</p>
+  </li>
+  <li>
+    <p>stage2: user application. This is the final stage, where execution is simply handed over to a user-provided application in a self-contained image.</p>
+  </li>
+</ul>
+
+<p>stage0 ships as a single executable called <code class="highlighter-rouge">rkt</code>, which is then organized in several subcommands (i.e. <code class="highlighter-rouge">rkt fetch</code>, <code class="highlighter-rouge">rkt run</code>, <code class="highlighter-rouge">rkt gc</code>, etc.).</p>
+
+<p>stage1 and stage2 are shipped as signed container images, with support for aci, docker, and (draft) oci format. While stage2 images are always provided by the user, stage1 images instead are typically provided together with rkt binary.</p>
+
+<p>stage1 image are swappable, in order to let the user pick an appropriate isolation level for their application. Historically, three main stage1 flavors existed:</p>
+
+<ul>
+  <li>
+    <p>stage1-kvm: a strong-isolation environment, built on top of KVM.</p>
+  </li>
+  <li>
+    <p>stage1-coreos: a intermediate-isolation environment, built on top of namespaces and cgroups.</p>
+  </li>
+  <li>
+    <p>stage1-fly: a weak-isolation environment, built on top of plain chroot.</p>
+  </li>
+</ul>
+
+<p>The rest of this article describes a small experimental stage1 written in Rust, named stage1-volo, much akin to stage1-fly.</p>
+
+<h2 id="a-stage1-written-in-rust">A stage1 written in Rust</h2>
+
+<p>Rust is a system programming language focued on safety, speed, and concurrency. It is developed by an active community of developers and mainly sponsored by Mozilla.</p>
+
+<p>Historically, most of rkt stage0 and stage1 have been written in Go. However, the clear architectural separation between stages allows for much flexibility in stage1 implementation.</p>
+
+<p>At the same time, Go comes with its own mandatory runtime which imposes some restrictions and requires some workarounds for modern system programming idioms. For example, manipulating process credentials is <a href="">hard</a> and interacting with namespaces requires <a href="">detours</a> in C constructors.</p>
+
+<p>On the other hand, Rust comes with smaller runtime overhead</p>
+
+<p>(even close to <a href="https://doc.rust-lang.org/1.15.0/core/">none</a> with <code class="highlighter-rouge">no_std</code>), built-in and ergonomic safety features, and a large <a href="https://crates.io/">ecosystem of libraries</a>.</p>
+
+<p>For those reasons, Rust can be seen as a well suited language for an experimental rkt stage1 implementation.</p>
+
+<h2 id="stage1-volo">stage1-volo</h2>
+
+<p>stage1-volo is an experimental stage1 for rkt, written in Rust. It implements <a href="https://coreos.com/rkt/docs/latest/devel/stage1-implementors-guide.html">rkt stage1 interface</a> and a subset of <a href="https://github.com/appc/spec">appc specification</a>.</p>
+
+<h3 id="entrypoints">Entrypoints</h3>
+
+<p>As per stage1 interface (currently at version “5”), volo implements 4 main entrypoints:</p>
+
+<ul>
+  <li>
+    <p>run</p>
+  </li>
+  <li>
+    <p>gc</p>
+  </li>
+  <li>
+    <p>stop</p>
+  </li>
+  <li>
+    <p>enter</p>
+  </li>
+</ul>
+
+<p>Those are exposed via annotations in the image manifest:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+"annotations": [
+
+{
+
+"name": "coreos.com/rkt/stage1/run",
+
+"value": "/run"
+
+},
+
+{
+
+"name": "coreos.com/rkt/stage1/enter",
+
+"value": "/enter"
+
+},
+
+{
+
+"name": "coreos.com/rkt/stage1/gc",
+
+"value": "/gc"
+
+},
+
+{
+
+"name": "coreos.com/rkt/stage1/stop",
+
+"value": "/stop"
+
+},
+
+{
+
+"name": "coreos.com/rkt/stage1/interface-version",
+
+"value": "5"
+
+}
+
+]
+
+</code></pre>
+</div>
+
+<h3 id="building-and-packaging">Building and packaging</h3>
+
+<p>TBD</p>
