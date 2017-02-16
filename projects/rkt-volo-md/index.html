@@ -271,53 +271,28 @@
 
 <p>Those are exposed via annotations in the image manifest:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-"annotations": [
-
-{
-
-"name": "coreos.com/rkt/stage1/run",
-
-"value": "/run"
-
-},
-
-{
-
-"name": "coreos.com/rkt/stage1/enter",
-
-"value": "/enter"
-
-},
-
-{
-
-"name": "coreos.com/rkt/stage1/gc",
-
-"value": "/gc"
-
-},
-
-{
-
-"name": "coreos.com/rkt/stage1/stop",
-
-"value": "/stop"
-
-},
-
-{
-
-"name": "coreos.com/rkt/stage1/interface-version",
-
-"value": "5"
-
-}
-
-]
-
-</code></pre>
-</div>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="s2">"annotations"</span><span class="err">:</span><span class="p">[</span><span class="w">  
+  </span><span class="p">{</span><span class="w">  
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"coreos.com/rkt/stage1/run"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="s2">"/run"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">  
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"coreos.com/rkt/stage1/enter"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="s2">"/enter"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">  
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"coreos.com/rkt/stage1/gc"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="s2">"/gc"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">  
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"coreos.com/rkt/stage1/stop"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="s2">"/stop"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">  
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"coreos.com/rkt/stage1/interface-version"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="s2">"5"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span></code></pre></figure>
 
 <h3 id="building-and-packaging">Building and packaging</h3>
 
