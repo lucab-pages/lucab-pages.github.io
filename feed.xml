@@ -5,9 +5,24 @@
     <description>Luca Bruno - Personal pages</description>
     <link>https://www.lucabruno.net/</link>
     <atom:link href="https://www.lucabruno.net/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 13 Aug 2017 20:50:09 +0000</pubDate>
-    <lastBuildDate>Sun, 13 Aug 2017 20:50:09 +0000</lastBuildDate>
+    <pubDate>Sun, 13 Aug 2017 21:06:12 +0000</pubDate>
+    <lastBuildDate>Sun, 13 Aug 2017 21:06:12 +0000</lastBuildDate>
     <generator>Jekyll v3.5.1</generator>
+    
+      <item>
+        <title>fxe: binary execution across Linux mount-namespaces</title>
+        <description>&lt;p&gt;This short post briefly describes a useful trick to execute binaries across different mount-namespaces. It consists of a neat technique involving &lt;code class=&quot;highlighter-rouge&quot;&gt;setns(2)&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;fexecve(3)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;fxe-rs&quot;&gt;fxe-rs&lt;/h2&gt;
+
+&lt;p&gt;A demo repository to illustrate this trick is available at &lt;a href=&quot;https://github.com/lucab/fxe-rs&quot;&gt;fxe-rs&lt;/a&gt;. It contains &lt;code class=&quot;highlighter-rouge&quot;&gt;fxe&lt;/code&gt; which is a small, pure-&lt;a href=&quot;https://www.rust-lang.org&quot;&gt;Rust&lt;/a&gt; program which is able to execute Linux binaries across mount-namespaces.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 13 Aug 2017 20:53:42 +0000</pubDate>
+        <link>https://www.lucabruno.net/posts/fxe-binary-execution-across-linux-mount-namespaces/</link>
+        <guid isPermaLink="true">https://www.lucabruno.net/posts/fxe-binary-execution-across-linux-mount-namespaces/</guid>
+        
+        
+      </item>
     
       <item>
         <title>Static hosting: jekyll, forestry, github and cloudflare</title>
