@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>LB: Posts</title>
+    <title>LB: fxe: binary execution across Linux mount-namespaces</title>
 
-    <meta name="description" content="Posts - index">
+    <meta name="description" content="Luca Bruno - Personal pages">
 
     <!-- Google Authorship Markup -->
     <link rel="author" href="https://plus.google.com/?rel=author">
@@ -15,25 +15,25 @@
     <!-- Social Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@lucabruno">
-    <meta name="twitter:title" content="Posts">
-    <meta name="twitter:description" content="Posts - index">
+    <meta name="twitter:title" content="fxe: binary execution across Linux mount-namespaces">
+    <meta name="twitter:description" content="Luca Bruno - Personal pages">
 
     
-    <meta property="twitter:image:src" content="https://www.lucabruno.net">
+    <meta property="twitter:image:src" content="https://www.lucabruno.net/assets/img/blog-image.png">
     
 
     <!-- Social Facebook/Open Graph -->
-    <meta property="og:url" content="https://www.lucabruno.net/posts/">
-    <meta property="og:title" content="Posts">
+    <meta property="og:url" content="https://www.lucabruno.net/posts/fxe-binary-execution-across-linux-mount-namespaces/">
+    <meta property="og:title" content="fxe: binary execution across Linux mount-namespaces">
     
-    <meta property="og:image" content="https://www.lucabruno.net">
+    <meta property="og:image" content="https://www.lucabruno.net/assets/img/blog-image.png">
     
-    <meta property="og:description" content="Posts - index">
+    <meta property="og:description" content="Luca Bruno - Personal pages">
     <meta property="og:site_name" content="Luca Bruno">
 
     <!-- Social Google+/Schema.org  -->
-    <meta itemprop="name" content="Posts"/>
-    <meta itemprop="description" content="Posts - index">
+    <meta itemprop="name" content="fxe: binary execution across Linux mount-namespaces"/>
+    <meta itemprop="description" content="Luca Bruno - Personal pages">
     <meta itemprop="image" content="https://www.lucabruno.net/assets/img/blog-image.png"/>
 
     <!-- Favicon -->
@@ -62,7 +62,7 @@
     <meta name="theme-color" content="#5d4d7a">
 
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="canonical" href="https://www.lucabruno.net/posts/">
+    <link rel="canonical" href="https://www.lucabruno.net/posts/fxe-binary-execution-across-linux-mount-namespaces/">
     <link rel="alternate" type="application/rss+xml" title="Luca Bruno" href="https://www.lucabruno.net/feed.xml" />
 </head>
 
@@ -95,7 +95,7 @@
     <ul>
       <li><span>#</span></li>
       <li><span>&nbsp;/&nbsp;</span></li>
-      <li><span>&nbsp;Posts&nbsp;</span></li>
+      <li><span>&nbsp;fxe: binary execution across Linux mount-namespaces&nbsp;</span></li>
     </ul>
 
     <ul>
@@ -177,30 +177,33 @@
 
 </header>
 
-        <section class="post" itemscope itemtype="http://schema.org/WebPage">
-
-            <article role="article" id="scroll" class="post-content" role="main" itemprop="mainContentOfPage">
-                <h2>Posts</h2>
-
-
-    <ul class="post-list">
+        <section class="post" itemscope itemtype="http://schema.org/BlogPosting">
             
-            <li><a href="https://www.lucabruno.net/posts/fxe-binary-execution-across-linux-mount-namespaces/">fxe: binary execution across Linux mount-namespaces<span class="entry-date"><time datetime="2017-08-13T20:53:42+00:00" itemprop="datePublished">August 13, 2017</time></a></li>
+                <div class="time">
+                    <time itemprop="datePublished" datetime="2017-08-13 20:53:42 +0000">13 Aug 2017</time>
+                </div>
             
-    </ul>
+            <h1 class="post-title" itemprop="name">fxe: binary execution across Linux mount-namespaces</h1>
 
+            <article role="article" id="scroll" class="post-content" itemprop="articleBody">
+                <p>This short post briefly describes a useful trick to execute binaries across different mount-namespaces. It consists of a neat technique involving <code class="highlighter-rouge">setns(2)</code> and <code class="highlighter-rouge">fexecve(3)</code>.</p>
 
-    <ul class="post-list">
-            
-            <li><a href="https://www.lucabruno.net/posts/static-hosting/">Static hosting: jekyll, forestry, github and cloudflare<span class="entry-date"><time datetime="2017-01-01T00:00:00+00:00" itemprop="datePublished">January 01, 2017</time></a></li>
-            
-    </ul>
+<h2 id="fxe-rs">fxe-rs</h2>
 
+<p>A demo repository to illustrate this trick is available at <a href="https://github.com/lucab/fxe-rs">fxe-rs</a>. It contains <code class="highlighter-rouge">fxe</code> which is a small, pure-<a href="https://www.rust-lang.org">Rust</a> program which is able to execute Linux binaries across mount-namespaces.</p>
 
+<p>The core of it is the following:</p>
 
             </article>
-            <script src="/assets/js/main.js"></script>
 
         </section>
+            <footer>
+
+	<p>Made with Jekyll (theme: space)</p>
+
+</footer>
+
+            <script src="/assets/js/main.js"></script>
+
     </body>
 </html>

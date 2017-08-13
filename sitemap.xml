@@ -2,6 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	
 	  <url>
+		<loc>https://www.lucabruno.net/posts/fxe-binary-execution-across-linux-mount-namespaces/</loc>
+	  </url>
+	
+	  <url>
 		<loc>https://www.lucabruno.net/posts/static-hosting/</loc>
 	  </url>
 	
