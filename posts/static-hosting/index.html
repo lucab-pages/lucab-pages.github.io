@@ -186,14 +186,23 @@
             <h1 class="post-title" itemprop="name">Static hosting: jekyll, forestry, github and cloudflare</h1>
 
             <article role="article" id="scroll" class="post-content" itemprop="articleBody">
-                <h2 id="static-hosting">Static hosting</h2>
+                <p>This post contains a quick summary describing how this website is actually made.</p>
+
+<h2 id="static-hosting">Static hosting</h2>
+
+<p>The whole website is purely made of static assets. It is versioned via <a href="https://git-scm.com/">git</a>. Hosting of static pages is provided by <a href="https://pages.github.com/">Github Pages</a>.</p>
 
 <h2 id="jekyll">Jekyll</h2>
 
+<p>The software running under the hood is <a href="https://jekyllrb.com/">Jekyll.</a> It allows to quickly build static websites starting from plaintext <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a> files.</p>
+
 <h2 id="forestry">Forestry</h2>
+
+<p>From time to time I enjoy using a CMS and writing contents directly from the browser. <a href="https://forestry.io/">Forestry</a> fits perfectly in the above flow, as it directly supports Jekyll and git.</p>
 
 <h2 id="cloudflare">Cloudflare</h2>
 
+<p>Finally, <a href="https://www.cloudflare.com">Cloudflare</a> content delivery network takes care of caching and last-hop <a href="https://en.wikipedia.org/wiki/Transport_Layer_Security">TLS</a> encapsulation.</p>
 
             </article>
 
