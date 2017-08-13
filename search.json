@@ -18,14 +18,6 @@
   
   
     {
-      "title"    : "fxe: binary execution across Linux mount-namespaces",
-      "category" : "",
-      "tags"     : "",
-      "url"      : "/posts/fxe-binary-execution-across-linux-mount-namespaces/",
-      "date"     : "13 Aug 2017"
-    } ,
-  
-    {
       "title"    : "Static hosting: jekyll, forestry, github and cloudflare",
       "category" : "",
       "tags"     : "jekyll, github, cloudflare, and forestry",
