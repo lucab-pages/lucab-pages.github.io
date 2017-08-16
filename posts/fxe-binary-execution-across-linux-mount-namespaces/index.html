@@ -244,13 +244,13 @@ nix::unistd::fexecve(exe_fd, args.as_slice(), env.as_slice())?;
 
 <p>As comments say, this can be roughly split into three steps:</p>
 <ol>
-  <li>The underlying executable (busybox) must be opened, in order to obtain a File Descriptor (FD) for <code class="highlighter-rouge">fexecve()</code>.</li>
-  <li>The running process needs to move itself to the target mount-namespace (PID-1 as seen from procfs) via <code class="highlighter-rouge">setns()</code>.</li>
+  <li>The underlying executable (busybox) must be opened, in order to obtain a File Descriptor (FD) for <code class="highlighter-rouge">fexecve(3)</code>.</li>
+  <li>The running process needs to move itself to the target mount-namespace (PID-1 as seen from procfs) via <code class="highlighter-rouge">setns(2)</code>.</li>
   <li>Once running in a different namespace, the FD obtained in the first step can be used to execute the binary.</li>
 </ol>
 
 <p>The interesting part here is right before executing the last step. At that point, the process is running in a different namespace where the original binary is not anymore available (viz. two unrelated containers) and it would not be able to execute it by path.
-However, it is still able to reference it by the file descriptor which has been obtained in the first step, and thus to execute it via <code class="highlighter-rouge">fexecve()</code>.</p>
+However, it is still able to reference it by the file descriptor which has been obtained in the first step, and thus to execute it via <code class="highlighter-rouge">fexecve(3)</code>.</p>
 
 <p>As a note for advanced readers, the same technique can be implemented with a direct usage of <code class="highlighter-rouge">execveat(2)</code>.</p>
 
@@ -268,13 +268,13 @@ However, it is still able to reference it by the file descriptor which has been 
 
 <h1 id="motivations">Motivations</h1>
 
-<p>There are several reasons behind this project and post, all them equally important.</p>
+<p>There are several reasons behind this project and post, all of them equally important.</p>
 
 <p>The initial one was experimenting around bind-mounts. I have hit usecases where the source path was not known a-priori, and I was looking for some way to remove this requirement.</p>
 
 <p>Then, there is currently a <a href="https://github.com/kubernetes/community/pull/589">push</a> in the Kubernetes world to move to containerized mount-utilities. This is however stepping into the minefield of recursive-shared mount propagation through the init mount-namespace. I’ve shot myself in the foot with that before, and I wanted to look for an alternative approach.</p>
 
-<p>Moreover, I stepped into fexecve() and I wanted to verify that the usage described in this post was actually feasible.</p>
+<p>Moreover, I stepped into <code class="highlighter-rouge">fexecve(3)</code> and I wanted to verify that the usage described in this post was actually feasible.</p>
 
 <p>The last part of the story is clearly personal research. I feel that Rust is generally well suited for container-related technologies, and that this field may benefit from some more experiments and docs. This is my little contribution to it :)</p>
 
