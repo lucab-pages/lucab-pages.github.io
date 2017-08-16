@@ -190,7 +190,7 @@
 
 <h2 id="fxe-rs">fxe-rs</h2>
 
-<p>A demo repository to illustrate this trick is available at [fxe-rs][fxe]. It just contains <code class="highlighter-rouge">fxe</code>: a small, pure-<a href="https://www.rust-lang.org">Rust</a> program which is able to execute Linux binaries across mount-namespaces.</p>
+<p>A demo repository to illustrate this trick is available at <a href="https://github.com/lucab/fxe-rs">fxe-rs</a>. It just contains <code class="highlighter-rouge">fxe</code>: a small, pure-<a href="https://www.rust-lang.org">Rust</a> program which is able to execute Linux binaries across mount-namespaces.</p>
 
 <p>As an example, let’s take a <code class="highlighter-rouge">busybox</code> container and pretend we want to run <code class="highlighter-rouge">modinfo crc16</code> to inspect the details of that specific kernel module. This typically requires asking the container runtime to bind-mount all relevant directories beforehand:</p>
 
@@ -272,11 +272,11 @@ However, it is still able to reference it by the file descriptor which has been 
 
 <p>The initial one was experimenting around bind-mounts. I have hit usecases where the source path was not known a-priori, and I was looking for some way to remove this requirement.</p>
 
-<p>Then, there is currently a push in the Kubernetes world to ship containerized mount-utilities which is however stepping into the minefield of recursive-shared mount propagation through the init mount-namespace. I’ve shot myself in the feet with that before, and I wanted to look for an alternative approach.</p>
+<p>Then, there is currently a <a href="https://github.com/kubernetes/community/pull/589">push</a> in the Kubernetes world to move to containerized mount-utilities. This is however stepping into the minefield of recursive-shared mount propagation through the init mount-namespace. I’ve shot myself in the foot with that before, and I wanted to look for an alternative approach.</p>
 
 <p>Moreover, I stepped into fexecve() and I wanted to verify that the usage described in this post was actually feasible.</p>
 
-<p>The last one is clearly personal research. I feel that Rust is generally well suited for container-related technologies, and that this field may benefit from some more experiments and docs. This is my little contribution to it :)</p>
+<p>The last part of the story is clearly personal research. I feel that Rust is generally well suited for container-related technologies, and that this field may benefit from some more experiments and docs. This is my little contribution to it :)</p>
 
 <h3 id="notes">Notes</h3>
 
