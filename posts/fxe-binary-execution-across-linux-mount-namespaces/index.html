@@ -190,18 +190,98 @@
 
 <h2 id="fxe-rs">fxe-rs</h2>
 
-<p>A demo repository to illustrate this trick is available at <a href="https://github.com/lucab/fxe-rs">fxe-rs</a>. It contains <code class="highlighter-rouge">fxe</code> which is a small, pure-<a href="https://www.rust-lang.org">Rust</a> program which is able to execute Linux binaries across mount-namespaces.</p>
+<p>A demo repository to illustrate this trick is available at [fxe-rs][fxe]. It just contains <code class="highlighter-rouge">fxe</code>: a small, pure-<a href="https://www.rust-lang.org">Rust</a> program which is able to execute Linux binaries across mount-namespaces.</p>
+
+<p>As an example, let’s take a <code class="highlighter-rouge">busybox</code> container and pretend we want to run <code class="highlighter-rouge">modinfo crc16</code> to inspect the details of that specific kernel module. This typically requires asking the container runtime to bind-mount all relevant directories beforehand:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ docker run -v /lib/modules:/lib/modules busybox modinfo crc16
+
+filename:       /lib/modules/4.11.0-1-amd64/kernel/lib/crc16.ko
+description:    CRC16 calculations
+license:        GPL
+depends:        
+intree:         Y
+vermagic:       4.11.0-1-amd64 SMP mod_unload modversions
+</code></pre>
+</div>
+
+<p>This is usually the simplest way to proceed and it works well in most cases. In some other cases however this may introduce additional issues: the source path may not be known beforehand (e.g. parts of it may be dynamic), or it may sometime not exist, or it may contain symlinks pointing outside of it, or an intermediate bind-mount may be harmful to have (e.g. when performing new mounts, due to different <a href="https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt">subtree and propagation</a> settings).</p>
+
+<p>In such cases, it may be useful to trade the bind-mounts in favor of a shared PID-namespace, in order to allow the containerized process to escape its mount-namespace and to execute other binaries directly in the target.
+In this case, we use the <code class="highlighter-rouge">fxe</code> example binary to escape to the host mount-namespace and execute <code class="highlighter-rouge">modinfo</code> there, without any additional bind-mount:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ docker run --privileged --pid=host quay.io/lucab/fxe:latest /fxe /proc/1/ns/mnt
+
+filename:       /lib/modules/4.11.0-1-amd64/kernel/lib/crc16.ko
+description:    CRC16 calculations
+license:        GPL
+depends:        
+intree:         Y
+vermagic:       4.11.0-1-amd64 SMP mod_unload modversions 
+</code></pre>
+</div>
+
+<p>This is a simple (and mostly pointless) example just to show this trick applied in a running scenario. Better usecases typically involve mounts and host manipulation, see references below.</p>
+
+<h1 id="technical-details">Technical details</h1>
 
 <p>The core of it is the following:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>// Move to the target mount-namespace.
+<div class="highlighter-rouge"><pre class="highlight"><code>// Get a FD to the `busybox` binary.                                                                                                                                                           
+let exe_fd = fs::File::open("/bin/busybox")?.into_raw_fd();
+
+// Move to PID-1 mount-namespace.
+let ns_fd = fs::File::open("/proc/1/ns/mnt")?.into_raw_fd();
 nix::sched::setns(ns_fd, sched::CLONE_NEWNS)?;
-nix::unistd::close(ns)?;
+nix::unistd::close(ns_fd)?;
 
 // Execute binary in the target.
+let args = vec![/* "modinfo", "crc16" */];
+let env = vec![/* ... */];
 nix::unistd::fexecve(exe_fd, args.as_slice(), env.as_slice())?;
 </code></pre>
 </div>
+
+<p>As comments say, this can be roughly split into three steps:</p>
+<ol>
+  <li>The underlying executable (busybox) must be opened, in order to obtain a File Descriptor (FD) for <code class="highlighter-rouge">fexecve()</code>.</li>
+  <li>The running process needs to move itself to the target mount-namespace (PID-1 as seen from procfs) via <code class="highlighter-rouge">setns()</code>.</li>
+  <li>Once running in a different namespace, the FD obtained in the first step can be used to execute the binary.</li>
+</ol>
+
+<p>The interesting part here is right before executing the last step. At that point, the process is running in a different namespace where the original binary is not anymore available (viz. two unrelated containers) and it would not be able to execute it by path.
+However, it is still able to reference it by the file descriptor which has been obtained in the first step, and thus to execute it via <code class="highlighter-rouge">fexecve()</code>.</p>
+
+<p>As a note for advanced readers, the same technique can be implemented with a direct usage of <code class="highlighter-rouge">execveat(2)</code>.</p>
+
+<p>For more details, check the documentation and the source in the <a href="https://github.com/lucab/fxe-rs">repository</a>.</p>
+
+<h1 id="caveats">Caveats</h1>
+
+<p>This has of course several caveats and it should not be seen as a general purpose technique.</p>
+
+<p>It is explicitly trading off some high-level isolation (sandboxing, PID segmentation, privileges dropping) for more low-level flexibility. This is generally useless and dangerous for unprivileged workloads, however some system-helpers may already be requiring it (e.g.  containerized mount utilities).</p>
+
+<p>This actively exploits the non-orthogonality of Linux namespaces, exploiting a shared PID-namespace to pivot across private mount-namespaces. As usual, this may make people very angry and can be widely regarded as a bad move.</p>
+
+<p>Moreover, the syscalls shown here introduce additional restrictions on the running process (single-thread namespace manipulation, exec by FD) which may make this technique impossibly hard in some languages (e.g. Golang).</p>
+
+<h1 id="motivations">Motivations</h1>
+
+<p>There are several reasons behind this project and post, all them equally important.</p>
+
+<p>The initial one was experimenting around bind-mounts. I have hit usecases where the source path was not known a-priori, and I was looking for some way to remove this requirement.</p>
+
+<p>Then, there is currently a push in the Kubernetes world to ship containerized mount-utilities which is however stepping into the minefield of recursive-shared mount propagation through the init mount-namespace. I’ve shot myself in the feet with that before, and I wanted to look for an alternative approach.</p>
+
+<p>Moreover, I stepped into fexecve() and I wanted to verify that the usage described in this post was actually feasible.</p>
+
+<p>The last one is clearly personal research. I feel that Rust is generally well suited for container-related technologies, and that this field may benefit from some more experiments and docs. This is my little contribution to it :)</p>
+
+<h3 id="notes">Notes</h3>
+
+<p>No further notes or edits on this post so far.</p>
+
 
             </article>
 
