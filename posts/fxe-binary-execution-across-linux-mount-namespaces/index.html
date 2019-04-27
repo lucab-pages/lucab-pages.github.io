@@ -194,7 +194,7 @@
 
 <p>As an example, let’s take a <code class="highlighter-rouge">busybox</code> container and pretend we want to run <code class="highlighter-rouge">modinfo crc16</code> to inspect the details of that specific kernel module. This typically requires asking the container runtime to bind-mount all relevant directories beforehand:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ docker run -v /lib/modules:/lib/modules busybox modinfo crc16
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -v /lib/modules:/lib/modules busybox modinfo crc16
 
 filename:       /lib/modules/4.11.0-1-amd64/kernel/lib/crc16.ko
 description:    CRC16 calculations
@@ -202,15 +202,14 @@ license:        GPL
 depends:        
 intree:         Y
 vermagic:       4.11.0-1-amd64 SMP mod_unload modversions
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>This is usually the simplest way to proceed and it works well in most cases. In some other cases however this may introduce additional issues: the source path may not be known beforehand (e.g. parts of it may be dynamic), or it may sometime not exist, or it may contain symlinks pointing outside of it, or an intermediate bind-mount may be harmful to have (e.g. when performing new mounts, due to different <a href="https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt">subtree and propagation</a> settings).</p>
 
 <p>In such cases, it may be useful to trade the bind-mounts in favor of a shared PID-namespace, in order to allow the containerized process to escape its mount-namespace and to execute other binaries directly in the target.
 In this case, we use the <code class="highlighter-rouge">fxe</code> example binary to escape to the host mount-namespace and execute <code class="highlighter-rouge">modinfo</code> there, without any additional bind-mount:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ docker run --privileged --pid=host quay.io/lucab/fxe:latest /fxe /proc/1/ns/mnt
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --privileged --pid=host quay.io/lucab/fxe:latest /fxe /proc/1/ns/mnt
 
 filename:       /lib/modules/4.11.0-1-amd64/kernel/lib/crc16.ko
 description:    CRC16 calculations
@@ -218,8 +217,7 @@ license:        GPL
 depends:        
 intree:         Y
 vermagic:       4.11.0-1-amd64 SMP mod_unload modversions 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>This is a simple (and mostly pointless) example just to show this trick applied in a running scenario. Better usecases typically involve mounts and host manipulation, see references below.</p>
 
@@ -227,7 +225,7 @@ vermagic:       4.11.0-1-amd64 SMP mod_unload modversions
 
 <p>The core of it is the following:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>// Get a FD to the `busybox` binary.                                                                                                                                                           
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Get a FD to the `busybox` binary.                                                                                                                                                           
 let exe_fd = fs::File::open("/bin/busybox")?.into_raw_fd();
 
 // Move to PID-1 mount-namespace.
@@ -239,8 +237,7 @@ nix::unistd::close(ns_fd)?;
 let args = vec![/* "modinfo", "crc16" */];
 let env = vec![/* ... */];
 nix::unistd::fexecve(exe_fd, args.as_slice(), env.as_slice())?;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>As comments say, this can be roughly split into three steps:</p>
 <ol>
