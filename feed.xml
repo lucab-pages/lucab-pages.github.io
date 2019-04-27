@@ -5,8 +5,8 @@
     <description>Luca Bruno - Personal pages</description>
     <link>https://www.lucabruno.net/</link>
     <atom:link href="https://www.lucabruno.net/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 27 Apr 2019 23:02:45 +0000</pubDate>
-    <lastBuildDate>Sat, 27 Apr 2019 23:02:45 +0000</lastBuildDate>
+    <pubDate>Sat, 27 Apr 2019 23:06:08 +0000</pubDate>
+    <lastBuildDate>Sat, 27 Apr 2019 23:06:08 +0000</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -27,8 +27,8 @@
         <title>Static hosting: jekyll, forestry, github and cloudflare</title>
         <description>&lt;p&gt;This post contains a quick summary describing how this website is actually made.&lt;/p&gt; &lt;h2 id=&quot;static-hosting&quot;&gt;Static hosting&lt;/h2&gt; &lt;p&gt;The whole website is purely made of static assets. It is versioned via &lt;a href=&quot;https://git-scm.com/&quot;&gt;git&lt;/a&gt;. Hosting of static pages is provided by &lt;a href=&quot;https://pages.github.com/&quot;&gt;Github Pages&lt;/a&gt;.&lt;/p&gt; &lt;h2 id=&quot;jekyll&quot;&gt;Jekyll&lt;/h2&gt; &lt;p&gt;The software running under the hood is &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll.&lt;/a&gt; It allows to quickly build static websites starting from plaintext &lt;a href=&quot;https://en.wikipedia.org/wiki/Markdown&quot;&gt;Markdown&lt;/a&gt; files.&lt;/p&gt; &lt;h2 id=&quot;forestry&quot;&gt;Forestry&lt;/h2&gt; &lt;p&gt;From time to time I enjoy using a CMS and writing contents directly from the browser. &lt;a href=&quot;https://forestry.io/&quot;&gt;Forestry&lt;/a&gt; fits perfectly in the above flow, as it directly supports Jekyll and git.&lt;/p&gt; &lt;h2 id=&quot;cloudflare&quot;&gt;Cloudflare&lt;/h2&gt;...</description>
         <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
-        <link>https://www.lucabruno.net/posts/static-hosting/</link>
-        <guid isPermaLink="true">https://www.lucabruno.net/posts/static-hosting/</guid>
+        <link>https://www.lucabruno.net/posts/2017-01-01-static-hosting</link>
+        <guid isPermaLink="true">https://www.lucabruno.net/posts/2017-01-01-static-hosting</guid>
         
         <category>github</category>
         
