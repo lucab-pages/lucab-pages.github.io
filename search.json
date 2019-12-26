@@ -18,6 +18,14 @@
   
   
     {
+      "title"    : "nRF52 debug access port protection",
+      "category" : "",
+      "tags"     : "openocd and nrf52",
+      "url"      : "/posts/2019-12-26/nrf52-ap-protection",
+      "date"     : "26 Dec 2019"
+    } ,
+  
+    {
       "title"    : "fxe-rs: binary execution across Linux mount-namespaces",
       "category" : "",
       "tags"     : "namespaces and rust",

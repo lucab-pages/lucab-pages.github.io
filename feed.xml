@@ -5,9 +5,23 @@
     <description>Luca Bruno - Personal pages</description>
     <link>https://www.lucabruno.net/</link>
     <atom:link href="https://www.lucabruno.net/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 26 Dec 2019 18:23:01 +0000</pubDate>
-    <lastBuildDate>Thu, 26 Dec 2019 18:23:01 +0000</lastBuildDate>
+    <pubDate>Thu, 26 Dec 2019 18:27:09 +0000</pubDate>
+    <lastBuildDate>Thu, 26 Dec 2019 18:27:09 +0000</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>nRF52 debug access port protection</title>
+        <description>&lt;p&gt;Nordic produces a multitude of ARM System-on-Chip (SoC) products. Among those, &lt;a href=&quot;https://infocenter.nordicsemi.com/topic/struct_nrf52/struct/nrf52.html&quot;&gt;nRF52&lt;/a&gt; is a popular ARMv7 chip with Bluetooth 5 support, running at 64 MHz.&lt;/p&gt; &lt;p&gt;&lt;img src=&quot;/assets/img/nRF52840-dongle.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt; &lt;h2 id=&quot;debugging-with-openocd&quot;&gt;Debugging with OpenOCD&lt;/h2&gt; &lt;p&gt;For this chip, &lt;a href=&quot;http://openocd.org/&quot;&gt;OpenOCD&lt;/a&gt; offers support for basic debugging features (&lt;code class=&quot;highlighter-rouge&quot;&gt;nrf52.cpu&lt;/code&gt; commands), flash manipulation (&lt;code class=&quot;highlighter-rouge&quot;&gt;nrf5&lt;/code&gt;/&lt;code class=&quot;highlighter-rouge&quot;&gt;flash&lt;/code&gt; commands), and advanced debugging via the Debug Access Port (&lt;code class=&quot;highlighter-rouge&quot;&gt;nrf52.dap&lt;/code&gt;).&lt;/p&gt; &lt;p&gt;Upon starting a debugging session via OpenOCD, it will be identified as such:&lt;/p&gt; &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ openocd -f interface/cmsis-dap.cfg -f target/nrf52.cfg [...] nrf52.cpu: hardware has 6 breakpoints, 4 watchpoints target halted due to debug-request, current...</description>
+        <pubDate>Thu, 26 Dec 2019 17:01:07 +0000</pubDate>
+        <link>https://www.lucabruno.net/posts/2019-12-26/nrf52-ap-protection</link>
+        <guid isPermaLink="true">https://www.lucabruno.net/posts/2019-12-26/nrf52-ap-protection</guid>
+        
+        <category>openocd</category>
+        
+        <category>nrf52</category>
+        
+        
+      </item>
     
       <item>
         <title>fxe-rs: binary execution across Linux mount-namespaces</title>
