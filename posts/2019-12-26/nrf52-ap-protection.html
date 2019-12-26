@@ -210,7 +210,7 @@ xPSR: 0x01000000 pc: 0xfffffffe msp: 0xfffffffc
 
 <p>The above error means that the vendor have disabled debugging capabilities (and firmware access) when flashing this chip.</p>
 
-<h1 id="debug-protection">Debug protection</h1>
+<h2 id="debug-protection">Debug protection</h2>
 
 <p>nRF52 chips come with (optional) flash read-back protection to prevent firmware dumping (among many other things). Such a feature works by disabling access to the default debug port in the CPU (AHB-AP).</p>
 
@@ -227,7 +227,7 @@ Its semantics is described in section 16.2.1 of the <a href="https://infocenter.
 
 <p>Similarly, AP-protection status can be checked at any time via the the <code class="highlighter-rouge">APPROTECTSTATUS</code> field, which is described in the same section.</p>
 
-<h1 id="openocd-helpers">OpenOCD helpers</h1>
+<h2 id="openocd-helpers">OpenOCD helpers</h2>
 
 <p>OpenOCD can be extended with custom scripts to directly support those operations. The <a href="https://en.wikipedia.org/wiki/Tcl">Tcl</a> code below (and submitted as a <a href="http://openocd.zylin.com/#/c/5384/">patch</a> upstream) adds three helper methods:</p>
 
